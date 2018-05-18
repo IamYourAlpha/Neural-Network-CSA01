@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{captioin}
+\graphicspath{ {./Screenshots/} }
+\title{ Kohonen Self Organizing Map- KSOM }
+\author{Atsushi oba (s1230128),        Hitoshi Ikuta (m5221106) \\
+   \and Chowdhury Md Intisar (m5212106),        Yunosuke Teshima (m5221151)
+}
+
+\begin{document}
+\maketitle 
+\section{Self Organizing Network}
+  When a self-organizing network is used, an input vector is presented at
+each step. The network tries to represent the input vector of higher dimention
+to a lower dimentional space. Thus each new input tries to learn the parameter
+to adapt. The best-known and most popular model of self-organizing networks is
+the topology-preserving map proposed by Teuvo Kohonen, hence Kohonen self
+organizing map. If an input space is to be processed by a neural network, the 
+first issue of importance is the structure of this space.  Kohonen networks
+learn to create maps of the input space in a self-organizing way. An image
+below depicts the network learning the function f to map the input space to
+output space. 
+
+\begin{figure}
+\centering
+\includegraphics[width=.4\linewidth]{./simpleFunction.png}
+\caption{Mapping of function from input space A to output space B. Here the
+region \(a\) is selected.}
+\end{figure}
+
+\section{Learning Algorithm}
+Let us consider, an n-dimensional space which will be mapped with the help of
+m-kohonen units or prototype vectors. Each unit becomes tne n-dimentional input
+x and computes the exciation or firing rate. The n-dimentional weights \(w_{1},
+w_{2},.., w_{m} \) are the computational neurons. The objective of each unit or
+neuron is that, it learns to specilize on different regions of input space.Thus
+when an input from such a region is fed into the network, the corresponding
+unit should fire with maximum excitation. During the training the unit which
+fires the most is selected using the winner takes it all algorithm. Then, the
+winner weight is updated as follows till it converges to the input. 
+
+\begin{equation}
+  \(w_{m}^{k+1} = w_{m} + \alpha(x - w_{m}^{k}) \)
+\end{equation}
+
+\begin{equation}
+  \( w_{i} = w_{i} + \eta\phi(i,k)(\xi-w_{i}) \)
+\end{equation}
+
+Both of the equation 1 and equation 2 can be used to update the weights.
+Equation 2 takes into amount its neighbour neurons. Thus a few neighborhood
+function \(\xi(i,k\) have been introduced. In both equation \(\alpha and \eta\)
+represents learning rate. 
+
+\section{Output of the Program}
+
+The given source code have been modified to take 150 samples of input from the
+ULC machine learning repository. The iris data set was fed into the program
+without any training label. The average accuracy of the program was
+\textbf{66.66\%}. The program succesfully clustered and mapped the input vector
+of class \textbf{Iris-Setosa} and \textbf{Virginica}. But it failed in
+ mapping the class \textbf{Iris-Versicolor}. 
+
+\section{Research Questions and Findings}
+
+\begin{itemize}
+  \item The reason for failing to converge to 3 differnt cluster is due to the
+initilization of the weight or prototype vector. 
+  \item A good initialization can converge to proper number of  clusters easily.
+  \item Another key factor is the dimention of prototype vector and the number
+    of prototype vector. 
+\end{itemize}
+
+Thus the above point greatly influence the outcome and convergence of the
+prototype vector to the solution.
+
+
+
+\section{Solution of the limitation by Python Framework \textbf{MiniSOm} }
+For a proper understanding of Self organizing network and to overcome the
+limitation of neuron initilization we have implemented the SOM with the help of
+a miniSom framework. This framework provides with proper weight initialization,
+Visuilization and image quantization.
+
+
+
+
+
+
+
+\end{document}
+
+
